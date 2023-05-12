@@ -5,5 +5,5 @@ Jinja2==3.1.2
 pipreqs==0.4.13
 pymongo==4.3.3
 requests==2.25.1
-virtualenv==20.13.0+ds
+virtualenv
 Werkzeug==2.3.4
