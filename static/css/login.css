@@ -1,0 +1,94 @@
+
+body{
+    background-image: url('https: //www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nitc.ac.in%2Fdept%2Fcse%2Fdepartment_photos%2F&psig=AOvVaw0uqEIQO2DvoywezRiKPslm&ust=1674396821451000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCKCo6q7s2PwCFQAAAAAdAAAAABAQ');
+    background-repeat: no-repeat, repeat;
+       
+}
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid black;
+}
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid black;
+}
+.login-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.login-form-1 {
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+        border-bottom: 2px solid blue;
+}
+
+.login-form-1 h3 {
+    text-align: center;
+    color: #333;
+}
+
+.login-form-2 {
+    padding: 5%;
+    background: #0062cc;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+        border-bottom: 2px solid white;
+}
+
+.login-form-2 h3 {
+    text-align: center;
+    color: #fff;
+}
+
+.login-container form {
+    padding: 10%;
+}
+
+.btnSubmit {
+    width: 40%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+    align-content: center;
+}
+
+.login-form-1 .btnSubmit {
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
+}
+
+.login-form-2 .btnSubmit {
+    font-weight: 600;
+    color: #0062cc;
+    background-color: #fff;
+}
+
+.login-form-2 .ForgetPwd {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-form-1 .ForgetPwd {
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.ChangePwd{
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
+}

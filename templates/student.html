@@ -1,0 +1,37 @@
+{% extends 'student_base.html' %}
+
+{% block student %}
+    <a href="{{url_for('student',roll=data['roll'])}}"><h1><b>STUDENT PAGE</b></h1></a>
+{% endblock %}
+
+{% block appointments %}
+    <a href="{{url_for('appointments',roll=data['roll'])}}"><b>Appointments</b></a>
+{% endblock %}
+
+{% block status %}
+    <a href="{{url_for('status',roll=data['roll'])}}"><b>Status</b></a>
+{% endblock %}
+
+{% block change_password_stu %}
+    <a href="{{url_for('change_password_stu',roll=data['roll'])}}">change password</a>
+{% endblock %}
+
+{% block content %}
+    <h1 align="center"><b>Welcome {{data["name"]}}</b></h1>
+    <div class="container">
+        <h3>
+            In this page you can make appointments and check status for the appointments you made.
+
+        </h3>
+    </div>
+    <div class="container">
+        <h3>Todays appointments :</h3>
+        {% for sched in data["sched"] %}
+        <ul>
+            <li>
+                You have appointment at {{sched}}
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+{% endblock %}

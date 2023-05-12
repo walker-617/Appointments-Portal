@@ -1,0 +1,41 @@
+{% extends 'student_base.html' %}
+
+{% block student %}
+    <a href="{{url_for('student',roll=data['roll'])}}"><h1><b>STUDENT PAGE</b></h1></a>
+{% endblock %}
+
+{% block appointments %}
+    <a href="{{url_for('appointments',roll=data['roll'])}}"><b>Appointments</b></a>
+{% endblock %}
+
+{% block status %}
+    <a href="{{url_for('status',roll=data['roll'])}}"><b>Status</b></a>
+{% endblock %}
+
+{% block change_password_stu %}
+    <a href="{{url_for('change_password_stu',roll=data['roll'])}}">change password</a>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 align="center">List of all Teachers</h2>
+        <br><br>
+        <table class="tch_table">
+            <tr>
+                {% for teacher in data["fac"] %}
+                {% if data["stud_branch"]==teacher["dept"] %}
+                <td class="tch_table_row" align="center">
+                    <div class="card" >
+                        <img  class="card-img-top" src="/static/images/avatar.png" alt="Card image">
+                        <div class="card-body">
+                            <h6 class="card-title">{{teacher["name"]}}</h6>
+                            <a style="font-size: 10px;" href="{{url_for('teacher',roll=data['roll'],user_name=teacher['user_name'])}}" class="btn btn-primary stretched-link">See Profile</a>
+                        </div>
+                    </div>
+                </td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+{% endblock %}

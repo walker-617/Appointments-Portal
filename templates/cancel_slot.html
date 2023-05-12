@@ -1,0 +1,119 @@
+{% extends 'faculty_base.html' %}
+
+{% block ap_link %}
+    <a href="{{url_for('faculty',user_name=data['user_name'])}}"><h1><b>FACULTY PAGE</b></h1></a>
+{% endblock %}
+
+{% block sel_slot %}
+    <a href="{{url_for('select_slot',user_name=data['user_name'])}}"><b>Appointments</b></a>
+{% endblock %}
+
+{% block can_slot %}
+    <a href="{{url_for('cancel_slot',user_name=data['user_name'])}}"><b>Cancel slot</b></a>
+{% endblock %}
+
+{% block change_password_fac %}
+    <a href="{{url_for('change_password_fac',user_name=data['user_name'])}}">change password</a>
+{% endblock %}
+
+{% block edit_profile %}
+    <a href="{{url_for('edit_profile',user_name=data['user_name'])}}">Edit profile</a>
+{% endblock %}
+
+{% block content %}
+    
+    <div class="sidenav">
+        <div class="profile">
+            <img src="/static/images/NITC_logo.jpg" alt="" width="100" height="auto">
+
+            <div class="name">
+                NIT Calicut
+            </div>
+            <div class="job">
+                Faculty
+            </div>
+        </div>
+
+        <div class="sidenav-url">
+            <div class="url">
+                <a href="#profile" class="active">Profile</a>
+                <hr align="center">
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- End -->
+    
+    <!-- Main -->
+    
+       
+        <form method="post" id="form1">
+                    <div class="container" align="center">
+                        <h2><b>Cancel slot page</b></h2>
+                    </div>        
+        <!-- End -->
+        <h3 class="title">Schedule</h3>
+        <br><br><br>
+        <div class="app-time">
+            <div>
+                <label style="text-align: center;" for="sel1" class="form-label">Select a day:</label>
+                <br>
+                <select style="width: 2.8cm; height:0.6cm;" class="form-select" id="sel1" name="day">
+                    {% for day1,day2 in {"-":"-","mon":"Monday","tue":"Tuesday","wed":"Wednesday","thu":"Thursday","fri":"Friday"}.items() %}
+                            <option value={{day1}}>{{day2}}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+            </div>
+            <script>
+                $(document).ready(function()
+                {
+                    $("#sel1").on('change',function()
+                    {
+                        var _day_=$(this).val();
+                        if(!_day_)
+                        {
+                            _day_="mon";
+                        }
+                        $("div.days").hide();
+                        $("#"+_day_).show();                        
+                    });
+                });
+            </script>
+            <div></div>
+            <div class="today">
+                {% for day in ["mon","tue","wed","thu","fri"] %}
+                    <div class="days" style="display: none" id={{day}}>
+                        <p><b>Timings (9:00 AM to 12:00 PM)</b></p>
+                        <div class="app-check">
+                            {% for slot in data[day] %}
+                                {% if slot in ["8","9","10","11","12"] %}
+                                    <input type="radio" class="option-input radio" name={{slot}} />
+                                    <div class="app-border">
+                                        <label class="app-label">{{slot}}:00 AM</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <br>
+                        <p><b>Timings (1:00 PM to 5:00 PM)</b></p>
+                        <div class="app-check">
+                            {% for slot in data[day] %}
+                                {% if slot in ["1","2","3","4","5"] %}
+                                    <input type="radio" class="option-input radio" name={{slot}} />
+                                    <div class="app-border">
+                                        <label class="app-label">{{slot}}:00 PM</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+            </form>
+            <br>
+                <button style="align-content: center; left:10cm;" class="sub-butt" type="submit" form="form1" value="Submit">Submit</button>
+        </div>
+{% endblock %}

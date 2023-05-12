@@ -1,0 +1,43 @@
+{% extends 'faculty_base.html' %}
+
+{% block ap_link %}
+    <a href="{{url_for('faculty',user_name=data['user_name'])}}"><h1><b>FACULTY PAGE</b></h1></a>
+{% endblock %}
+
+{% block sel_slot %}
+    <a href="{{url_for('select_slot',user_name=data['user_name'])}}"><b>Appointments</b></a>
+{% endblock %}
+
+{% block can_slot %}
+    <a href="{{url_for('cancel_slot',user_name=data['user_name'])}}"><b>Cancel slot</b></a>
+{% endblock %}
+
+{% block change_password_fac %}
+    <a href="{{url_for('change_password_fac',user_name=data['user_name'])}}">change password</a>
+{% endblock %}
+
+{% block edit_profile %}
+    <a href="{{url_for('edit_profile',user_name=data['user_name'])}}">Edit profile</a>
+{% endblock %}
+
+{% block content %}
+    <h1 align="center"><b>Welcome {{data["name"]}}</b></h1>
+    <div class="container">
+        <h3>
+            In this page you can create appointment slots and cancel them.
+        </h3>
+        <p>*Please fill the details in edit profile page.</p>
+    </div>
+    <div class="container">
+        <h3>Todays appointments :</h3>
+        {% for sched in data["sched"] %}
+        <ul>
+            {% if sched!="" %}
+            <li>
+                You have appointment at {{sched}}
+            </li>
+            {% endif %}
+        </ul>
+        {% endfor %}
+    </div>
+{% endblock %}

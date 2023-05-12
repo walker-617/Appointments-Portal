@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/admin.css')}}">
+    <title>Admin</title>
+</head>
+<body>
+    <div style="text-align: center;" class="col-md-6 login-form-1">
+    <h1 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" align="center">
+        Admin Page
+    </h1>
+    <div class="container login-container">
+        <form class="container" align="center" method="POST">
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="Teacher Name " value="" required>
+    
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="user_name" placeholder="Teacher ID " value="" required>
+                <br>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password " value="" required>
+                <br>
+            </div>
+            <div class="form-group">
+                <br>
+                <input type="submit" class="btnSubmit" value="Add">
+            </div>
+            <div class="form-group">
+                <br>
+                <a style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" href="{{url_for('login')}}" class="ForgetPwd">Go to Login page</a>
+            </div>
+        </form>
+    </div>
+    </div>
+    
+    
+</body>
+</html>
