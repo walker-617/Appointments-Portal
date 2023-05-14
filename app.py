@@ -435,4 +435,5 @@ def logout():
     session["id"]=""
     return redirect(url_for("login"))
 
-app.run(debug='True')
+if __name__ == '__main__':
+    app.run(debug=True, port=10000)
