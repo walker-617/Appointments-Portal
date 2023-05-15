@@ -9,7 +9,7 @@ db=client["database"]
 today_=""
 time_=0
 
-function reload():
+def reload():
     today_=datetime.now().strftime("%A")[:3].lower()
     time_=datetime.now().hour
 
