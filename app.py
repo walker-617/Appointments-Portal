@@ -24,7 +24,7 @@ def reload():
         check=1
 
     if today_=="mon":
-        check==0
+        check=0
 
     for x in ["mon","tue","wed","thu","fri"]:
         if x==today_:
