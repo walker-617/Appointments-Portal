@@ -3,40 +3,46 @@ from flask_session import Session
 import pymongo
 from datetime import datetime
 
-today_=datetime.now().strftime("%A")[:3].lower()
-today_="mon"
-time_="0"
-check=0
-
 client=pymongo.MongoClient("mongodb+srv://walker:walker617@hod-portal.hpemmk8.mongodb.net/?retryWrites=true&w=majority")
 db=client["database"]
 
-if today_=="sat" and not check:
-    coll=db["faculty_schedule"]
-    coll.delete_many({})
-    coll=db["student_schedule"]
-    coll.delete_many({})
-    coll=db["slots_list"]
-    coll.delete_many({})
-    check=1
+today_=""
+time_=0
 
-for x in ["mon","tue","wed","thu","fri"]:
-    if x==today_:
-        break
+function reload():
+    today_=datetime.now().strftime("%A")[:3].lower()
+    time_=datetime.now().hour
+
+    if today_=="sat" and check==0:
+        coll=db["faculty_schedule"]
+        coll.delete_many({})
+        coll=db["student_schedule"]
+        coll.delete_many({})
+        coll=db["slots_list"]
+        coll.delete_many({})
+        check=1
+
+    if today_=="mon":
+        check==0
+
+    for x in ["mon","tue","wed","thu","fri"]:
+        if x==today_:
+            break
+        coll=db["slots_list"]
+        f=list(coll.find({"day":x}))
+        if len(f):
+            coll.update_many({"day":x},{"$set":{"status":"inactive"}})
+
     coll=db["slots_list"]
-    f=list(coll.find({"day":x}))
+    f=list(coll.find({"day":today_}))
     if len(f):
-        coll.update_many({"day":x},{"$set":{"status":"inactive"}})
-
-coll=db["slots_list"]
-f=list(coll.find({"day":today_}))
-if len(f):
-    for x in f:
-        time=int(x["time"])
-        if time in [1,2,3,4,5]:
-            time=time+12
-        if time <= int(time_):
-            coll.update_many({"day":today_,"time":x["time"]},{"$set":{"status":"inactive"}})
+        for x in f:
+            time=int(x["time"])
+            if time in [1,2,3,4,5]:
+                time=time+12
+            if time <= int(time_):
+                coll.update_many({"day":today_,"time":x["time"]},{"$set":{"status":"inactive"}})
+    return
 
 app=Flask(__name__)
 app.secret_key="WALKER"
@@ -46,6 +52,7 @@ Session(app)
 
 @app.route('/',methods=["POST","GET"])
 def login():
+    reload()
     session["id"]=""
     if request.method=="POST":
         if 'fac_login' in request.form:
@@ -92,6 +99,7 @@ def login():
 
 @app.route('/admin',methods=["POST","GET"])
 def admin():
+    reload()
     if session["id"]=="":
         return redirect(url_for("login"))
     if request.method=="POST":
@@ -118,6 +126,7 @@ def admin():
 
 @app.route('/signup',methods=["POST","GET"])
 def signup():
+    reload()
     if request.method=="POST":
         roll=request.form.get("roll")
         name=request.form.get("name")
@@ -146,6 +155,7 @@ def signup():
 
 @app.route('/student',methods=["POST","GET"])
 def student():
+    reload()
     roll=request.args.get('roll')
     if session["id"]=="" or session["id"]!=roll:
         return redirect(url_for("login"))
@@ -166,6 +176,7 @@ def student():
 
 @app.route('/change_password_stu',methods=["POST","GET"])
 def change_password_stu():
+    reload()
     roll=request.args.get("roll")
     if session["id"]=="" or session["id"]!=roll:
         return redirect(url_for("login"))
@@ -188,6 +199,7 @@ def change_password_stu():
 
 @app.route('/change_password_fac',methods=["POST","GET"])
 def change_password_fac():
+    reload()
     user_name=request.args.get("user_name")
     if session["id"]=="" or session["id"]!=user_name:
         return redirect(url_for("login"))
@@ -210,6 +222,7 @@ def change_password_fac():
 
 @app.route('/appointments',methods=["POST","GET"])
 def appointments():
+    reload()
     roll=request.args.get('roll')
     if session["id"]=="" or session["id"]!=roll:
         return redirect(url_for("login"))
@@ -222,6 +235,7 @@ def appointments():
 
 @app.route('/teacher',methods=["POST","GET"])
 def teacher():
+    reload()
     user_name=request.args.get('user_name')
     roll=request.args.get('roll')
     if session["id"]=="" or session["id"]!=roll:
@@ -260,6 +274,7 @@ def teacher():
 
 @app.route('/status',methods=["POST","GET"])
 def status():
+    reload()
     if request.method=="POST":
         num=""
         for post in request.form:
@@ -311,6 +326,7 @@ def status():
 
 @app.route('/faculty',methods=["POST","GET"])
 def faculty():
+    reload()
     user_name=request.args.get('user_name')
     if session["id"]=="" or session["id"]!=user_name:
         return redirect(url_for("login"))
@@ -338,6 +354,7 @@ def faculty():
 
 @app.route('/select_slot',methods=["POST","GET"])
 def select_slot():
+    reload()
     user_name=request.args.get('user_name')
     if session["id"]=="" or session["id"]!=user_name:
         return redirect(url_for("login"))
@@ -377,6 +394,7 @@ def select_slot():
 
 @app.route('/cancel_slot',methods=["POST","GET"])
 def cancel_slot():
+    reload()
     user_name=request.args.get('user_name')
     if session["id"]=="" or session["id"]!=user_name:
         return redirect(url_for("login"))
@@ -413,6 +431,7 @@ def cancel_slot():
 
 @app.route('/edit_profile',methods=["POST","GET"])
 def edit_profile():
+    reload()
     user_name=request.args.get("user_name")
     if session["id"]=="" or session["id"]!=user_name:
         return redirect(url_for("login"))
@@ -432,6 +451,7 @@ def edit_profile():
 
 @app.route('/logout',methods=["POST","GET"])
 def logout():
+    reload()
     session["id"]=""
     return redirect(url_for("login"))
 
