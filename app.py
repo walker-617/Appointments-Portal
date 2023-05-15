@@ -8,6 +8,7 @@ db=client["database"]
 
 today_=""
 time_=0
+check=0
 
 def reload():
     today_=datetime.now().strftime("%A")[:3].lower()
