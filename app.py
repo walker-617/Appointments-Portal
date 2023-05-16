@@ -15,10 +15,9 @@ def reload():
     global time_
     global check
     
-    today_=datetime.now().strftime("%A")[:3].lower()
-    time_=datetime.now().hour
-    
-    print(today_," ",time_)
+    timezone=pytz.timezone('Asia/Kolkata')
+    today_=datetime.now(timezone).strftime("%A")[:3].lower()
+    time_=datetime.now(timezone).hour
 
     if today_=="sat" and check==0:
         coll=db["faculty_schedule"]
