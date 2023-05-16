@@ -20,6 +20,8 @@ def reload():
     today_=datetime.now(timezone).strftime("%A")[:3].lower()
     time_=datetime.now(timezone).hour
 
+    print(today_," ",time_)
+
     if today_=="sat" and check==0:
         coll=db["faculty_schedule"]
         coll.delete_many({})
@@ -175,7 +177,9 @@ def student():
             user_name=x["user_name"]
             coll=db["faculty"]
             name=list(coll.find({"user_name":user_name}))[0]["name"]
-            sched.append(time+" with "+name+".")
+            coll=db["slots_list"]
+            if(len(list(coll.find({"user_name":user_name,"time":time,"status":"active"})))):
+                sched.append(time+" with "+name+".")
     coll=db["student"]
     name=coll.find({"roll":roll})[0]["name"]
     data={"name":name,"roll":roll,"sched":sched}
@@ -322,7 +326,7 @@ def status():
                         status=k[0]["status"]
                         students=k[0]["students"]
                         i=students.index(roll)
-                        if i>1:
+                        if i>1 and status not in ["canceled","inactive"]:
                             status="waiting"+"("+"WL "+str(i-1)+")"
                     else:
                         status="active"
@@ -353,7 +357,9 @@ def faculty():
             stud_list+=f["name"]+" ("+s+") "+","
             count=count+1
         if len(stud):
-            sched.append(time+" with "+stud_list)
+            coll=db["slots_list"]
+            if(len(list(coll.find({"user_name":user_name,"time":time,"status":"active"})))):
+                sched.append(time+" with "+stud_list)
     coll=db["faculty"]
     name=coll.find({"user_name":user_name})[0]["name"]
     data={"user_name":user_name,"name":name,"sched":sched}
