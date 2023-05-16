@@ -7,11 +7,13 @@ client=pymongo.MongoClient("mongodb+srv://walker:walker617@hod-portal.hpemmk8.mo
 db=client["database"]
 
 today_=""
-time_=0
+time_="0"
 check=0
 
 def reload():
+    global today_
     today_=datetime.now().strftime("%A")[:3].lower()
+    global time_
     time_=datetime.now().hour
 
     if today_=="sat" and check==0:
