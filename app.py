@@ -17,6 +17,8 @@ def reload():
     
     today_=datetime.now().strftime("%A")[:3].lower()
     time_=datetime.now().hour
+    
+    print(today_," ",time_)
 
     if today_=="sat" and check==0:
         coll=db["faculty_schedule"]
