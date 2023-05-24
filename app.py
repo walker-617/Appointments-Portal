@@ -4,7 +4,7 @@ import pymongo
 from datetime import datetime
 import pytz
 
-client=pymongo.MongoClient("mongodb+srv://walker:walker617@hod-portal.hpemmk8.mongodb.net/?retryWrites=true&w=majority")
+client=pymongo.MongoClient("your mongoDB link here")
 db=client["database"]
 
 today_=""
