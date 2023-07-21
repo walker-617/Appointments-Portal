@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/signup.css')}}">
+    <title>Sign Up</title>
+    <link rel = "icon" href = "{{url_for('static',filename='images/title_icon.png')}}" type = "image/x-icon">
+</head>
+
+<body>
+    <div style="text-align: center;" class="col-md-6 login-form-1">
+        <div class="container login-container">
+            <h1 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" align="center">
+                Signup Page
+            </h1>
+            <form class="container" align="center" method="POST">
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Student Name" value="" name="name" required>
+
+                </div>
+
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Roll Number" value="" name="roll" required>
+                    <br>
+                </div>
+
+                <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email" value="" name="email" required>
+                <br>
+                </div>
+               <br>
+                <div class="select">
+                
+                <select name="branch">
+                    
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="MECH">MECH</option>
+                    <option value="CIVIL">CIVIL</option>
+                    <option value="CE">CE</option>
+                </select>
+                
+                <br>
+                </div>
+                <br>
+                <div class="select">
+                
+                <select name="sem">
+                    <option value="S1">SEM-I</option>
+                    <option value="S2">SEM-II</option>
+                    <option value="S3">SEM-III</option>
+                    <option value="S4">SEM-IV</option>
+                    <option value="S5">SEM-V</option>
+                    <option value="S6">SEM-VI</option>
+                    <option value="S7">SEM-VII</option>
+                    <option value="S8">SEM-VIII</option>
+ 
+                </select>
+                
+                <br>
+                </div>  
+                <br>  
+                <div class="select">
+                    <select name="batch">
+                             <option value="01">01</option>
+                             <option value="02">02</option>
+                             <option value="03">03</option>
+                             <option value="04">04</option>
+
+                    </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Country" value="" name="country" required>
+                <br>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Phone Number" name="phone" value="" required>
+                    <br>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password " name="password" value="" required>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Confirm Password " name="conf_password" value=""
+                        required>
+                    <br>
+                </div>
+                
+                <div class="form-group">
+                    <br>
+                    <input type="submit" class="btnSubmit" value="Add">
+                </div>
+                <div style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                    <br>
+                    <a class="ForgetPwd" href="{{url_for('login')}}">Back to Login Page?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
